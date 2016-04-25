@@ -1,11 +1,11 @@
 import React from 'react'
-import GraphContainer from './GraphContainer'
+import GraphContainer from './GraphContainer';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state, ownProps)  => ({ symbol : ownProps.params.symbol });
 
 const Foo = ({symbol}) => (
-  <GraphContainer width={800} height={600} symbol={symbol}/>
+    <GraphContainer width={800} height={600} symbol={symbol}/>
 );
 
 

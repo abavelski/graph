@@ -8,6 +8,7 @@ import drawLine from './drawLine';
 
 export function buildGraph(options) {
   if (options.data) {
+    console.log('building graph');
 
     const { width, height, symbol, data, mountPoint } = options;
 
