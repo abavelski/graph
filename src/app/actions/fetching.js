@@ -28,7 +28,15 @@ export function fetchOk(res) {
 export function fetchData(symbol) {
   return function (dispatch) {
     dispatch(requestData(symbol));
-    return request.get('/api/history/'+ symbol).end((err, res) => dispatch(fetchOk(res.body)) );
+    return request
+        .get('/api/history/'+ symbol)
+        .end((err, res) => {
+              let data = res.body;
+              data.forEach(function(d) {
+                  d[0] = new Date(d[0]);
+                });
+              dispatch(fetchOk(data)) ;
+              });
   }
 
 }
