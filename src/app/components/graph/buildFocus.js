@@ -1,6 +1,6 @@
 import d3 from 'd3';
 
-let bisectDate = d3.bisector((d) => d[0]).left;
+let bisectDate = d3.bisector((d) => d.date).left;
 let dateFormat = d3.time.format("%Y-%m-%d");
 
 export default function({ svg, w , h, x, y, data}) {
@@ -21,17 +21,61 @@ export default function({ svg, w , h, x, y, data}) {
     .attr("x", 20)
     .attr("y", 10)
     .style("opacity", 0.6)
+    .text("Open")
+
+  focus.append("text")
+    .attr("x", 20)
+    .attr("y", 20)
+    .style("opacity", 0.6)
     .text("Close")
 
   focus.append("text")
+    .attr("x", 20)
+    .attr("y", 30)
+    .style("opacity", 0.6)
+    .text("High")
+
+  focus.append("text")
+    .attr("x", 20)
+    .attr("y", 40)
+    .style("opacity", 0.6)
+    .text("Low")
+
+  focus.append("text")
+    .attr("x", 20)
+    .attr("y", 50)
+    .style("opacity", 0.6)
+    .text("Volume")
+
+  focus.append("text")
     .attr("class", "date")
-    .attr("x", 50)
+    .attr("x", 60)
     .attr("y", 0)
 
   focus.append("text")
-    .attr("class", "value")
-    .attr("x", 50)
+    .attr("class", "open")
+    .attr("x", 60)
     .attr("y", 10)
+
+  focus.append("text")
+    .attr("class", "close")
+    .attr("x", 60)
+    .attr("y", 20)
+
+  focus.append("text")
+    .attr("class", "high")
+    .attr("x", 60)
+    .attr("y", 30)
+
+  focus.append("text")
+    .attr("class", "low")
+    .attr("x", 60)
+    .attr("y", 40)
+
+  focus.append("text")
+    .attr("class", "volume")
+    .attr("x", 60)
+    .attr("y", 50)
 
   focus.append("line")
     .attr("class", "y")
@@ -60,25 +104,37 @@ export default function({ svg, w , h, x, y, data}) {
       i = bisectDate(data, x0, 1),
       d0 = data[i - 1],
       d1 = data[i],
-      d = x0 - d0[0] > d1[0] - x0 ? d1 : d0;
+      d = x0 - d0.date > d1.date - x0 ? d1 : d0;
 
       focus.select("circle.y")
       .attr("transform",
-      "translate(" + x(d[0]) + "," + y(d[1]) + ")");
+      "translate(" + x(d.date) + "," + y(d.close) + ")");
 
       focus.select("line.y")
       .attr("transform",
-      "translate(" + x(d[0]) + ",0)");
+      "translate(" + x(d.date) + ",0)");
 
       focus.select("line.x")
       .attr("transform",
-      "translate(0,"+ y(d[1]) + ")");
+      "translate(0,"+ y(d.close) + ")");
 
       focus.select("text.date")
-      .text(dateFormat(d[0]));
+      .text(dateFormat(d.date));
 
-      focus.select("text.value")
-      .text(d[1])
+      focus.select("text.open")
+      .text(d.open)
+
+      focus.select("text.close")
+      .text(d.close)
+
+      focus.select("text.high")
+      .text(d.high)
+
+      focus.select("text.low")
+      .text(d.low)
+
+      focus.select("text.volume")
+      .text(d.volume)
     }
 
     // append the rectangle to capture mouse

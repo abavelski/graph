@@ -31,10 +31,18 @@ export function fetchData(symbol) {
     return request
         .get('/api/history/'+ symbol)
         .end((err, res) => {
-              let data = res.body;
-              data.forEach(function(d) {
-                  d[0] = new Date(d[0]);
+              let data = [];
+              res.body.forEach(function(d) {
+                data.push({
+                  date : new Date(d[0]),
+                  open: d[1],
+                  high: d[2],
+                  low: d[3],
+                  close: d[4],
+                  volume: d[5],
+                  adjClose: d[6],
                 });
+              });
               dispatch(fetchOk(data)) ;
               });
   }

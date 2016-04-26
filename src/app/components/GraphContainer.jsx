@@ -12,9 +12,11 @@
     }
 
     componentWillReceiveProps(props) {
-      const { width, height, symbol, data } = props;
+      console.log('componentWillReceiveProps', props);
+      const { width, height, symbol, data, areaToggled } = props;
       if (data) {
           buildGraph({
+            areaToggled,
             width,
             height,
             symbol,
@@ -25,6 +27,7 @@
     }
 
     shouldComponentUpdate(nextProps, nextState) {
+      console.log('shouldComponentUpdate', nextProps, nextState);
       return false;
     }
 

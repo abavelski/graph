@@ -4,7 +4,7 @@ const initialState = {
   isFetching: false
 }
 
-export default function update(state = initialState, action) {
+export default function(state = initialState, action) {
   if(action.type === FETCH_DATA && action.status==='fetching') {
     return {
       isFetching: true

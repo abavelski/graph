@@ -2,7 +2,6 @@
 import {colors} from 'material-ui/styles';
 
 export default {
-
     txt: {
         color: colors.white,
         fontWeight: 300,
@@ -18,7 +17,5 @@ export default {
         backgroundColor: colors.grey700,
         width: '100%',
         height: 48
-    },
-
-
+    }
 };
