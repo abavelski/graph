@@ -1,8 +1,9 @@
-import { AREA_TOGGLE, VOLUME_TOGGLE } from '../constants'
+import { CHART_TYPE_CHANGE, VOLUME_TOGGLE } from '../constants'
 
-export function areaToggle() {
+export function chartTypeChange(chartType) {
   return {
-    type: AREA_TOGGLE
+    type: CHART_TYPE_CHANGE,
+    chartType
   }
 }
 

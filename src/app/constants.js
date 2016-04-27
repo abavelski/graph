@@ -1,4 +1,4 @@
 
 export const FETCH_DATA = 'FETCH_DATA';
-export const AREA_TOGGLE = 'AREA_TOGGLE';
+export const CHART_TYPE_CHANGE = 'CHART_TYPE_CHANGE';
 export const VOLUME_TOGGLE = 'VOLUME_TOGGLE';

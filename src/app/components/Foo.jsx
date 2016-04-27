@@ -3,10 +3,21 @@ import GraphContainer from './GraphContainer';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 
-import { areaToggle, volumeToggle } from '../actions/chartOptions';
+
+import { chartTypeChange, volumeToggle } from '../actions/chartOptions';
 
 const styles = {
+  volume : {
+    display: 'inline-block',
+    fontSize: '15px',
+    height: '48px',
+    outline: 'none',
+    position: 'relative',
+    width: 'auto'
+  },
   heading: {
     textAlign: 'center'
   },
@@ -16,7 +27,7 @@ const styles = {
   },
   buttons : {
     float: 'right',
-    width: 350
+    width: 550
   },
   button : {
     fontWeight: 400,
@@ -33,12 +44,18 @@ const styles = {
 
 const mapStateToProps = (state, ownProps)  => ({
     symbol : ownProps.params.symbol,
-    areaToggled : state.chartOptions.areaToggled,
+    chartType : state.chartOptions.chartType,
     volumeToggled : state.chartOptions.volumeToggled
 });
-const Foo = ({symbol, areaToggled, volumeToggled, areaToggle, volumeToggle}) => (
+const Foo = ({symbol, chartType, volumeToggled, chartTypeChange, volumeToggle}) => (
     <div style={styles.container}>
       <div style={styles.buttons}>
+        <Toggle label="Volume" toggled={volumeToggled} onToggle={()=> volumeToggle()} style={styles.volume}/>
+        <DropDownMenu value={chartType} onChange={(e, i, v)=>chartTypeChange(v)}  >
+          <MenuItem value="area" primaryText="Area" />
+          <MenuItem value="line" primaryText="Line" />
+          <MenuItem value="bars" primaryText="Bars" />
+        </DropDownMenu>
         <FlatButton style={styles.button} labelStyle={styles.btnText} label="1d" />
         <FlatButton style={styles.button} labelStyle={styles.btnText} label="1w" />
         <FlatButton style={styles.button} labelStyle={styles.btnText} label="1m" />
@@ -49,12 +66,10 @@ const Foo = ({symbol, areaToggled, volumeToggled, areaToggle, volumeToggle}) => 
         <FlatButton style={styles.button} labelStyle={styles.btnText} label="5y" />
         <FlatButton style={styles.button} labelStyle={styles.btnText} label="All" />
       </div>
-      <GraphContainer width={800} height={600} symbol={symbol} areaToggled={areaToggled} volumeToggled={volumeToggled}/>
-      <br/>
-      <Toggle label="Area" toggled={areaToggled} onToggle={()=> areaToggle()} style={{width: 100}}/>
-      <Toggle label="Volume" toggled={volumeToggled} onToggle={()=> volumeToggle()} style={{width: 100}}/>
+      <GraphContainer width={800} height={600} symbol={symbol} chartType={chartType} volumeToggled={volumeToggled}/>
+
     </div>
 );
 
 
-export default connect(mapStateToProps, {areaToggle, volumeToggle})(Foo);
+export default connect(mapStateToProps, {chartTypeChange, volumeToggle})(Foo);

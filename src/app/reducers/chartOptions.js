@@ -1,15 +1,15 @@
-import { AREA_TOGGLE, VOLUME_TOGGLE } from '../constants'
+import { CHART_TYPE_CHANGE, VOLUME_TOGGLE } from '../constants'
 
 const initialState = {
-  areaToggled: true,
+  chartType: 'area',
   volumeToggled: true
 }
 
 export default function (state = initialState, action) {
-  if(action.type === AREA_TOGGLE) {
+  if(action.type === CHART_TYPE_CHANGE) {
     return {
       ...state,
-      areaToggled: !state.areaToggled
+      chartType: action.chartType
      }
   } else if (action.type === VOLUME_TOGGLE) {
     return {
