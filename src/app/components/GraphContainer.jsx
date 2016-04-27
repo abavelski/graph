@@ -13,10 +13,11 @@
 
     componentWillReceiveProps(props) {
       console.log('componentWillReceiveProps', props);
-      const { width, height, symbol, data, areaToggled } = props;
+      const { width, height, symbol, data, areaToggled, volumeToggled } = props;
       if (data) {
           buildGraph({
             areaToggled,
+            volumeToggled,
             width,
             height,
             symbol,

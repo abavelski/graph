@@ -1,10 +1,9 @@
 import d3 from 'd3';
 
-let bisectDate = d3.bisector((d) => d.date).left;
 let dateFormat = d3.time.format("%Y-%m-%d");
 
 export default function({ svg, w , h, x, y, data}) {
-  //const { svg, w , h} = options;
+
   let focus = svg.append("g").style("display", "none");
 
   focus.append("circle")
@@ -100,19 +99,17 @@ export default function({ svg, w , h, x, y, data}) {
     .style("fill", "none");
 
     function mousemove() {
-      let x0 = x.invert(d3.mouse(this)[0]),
-      i = bisectDate(data, x0, 1),
-      d0 = data[i - 1],
-      d1 = data[i],
-      d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+      let domain = x.domain();
+      let i = domain[d3.bisect(x.range(), d3.mouse(this)[0]) - 1];
+      let d = data[i];
 
       focus.select("circle.y")
       .attr("transform",
-      "translate(" + x(d.date) + "," + y(d.close) + ")");
+      "translate(" + x(i) + "," + y(d.close) + ")");
 
       focus.select("line.y")
       .attr("transform",
-      "translate(" + x(d.date) + ",0)");
+      "translate(" + x(i) + ",0)");
 
       focus.select("line.x")
       .attr("transform",

@@ -1,2 +1,2 @@
 export fetching from './fetching';
-export areaToggle from './areaToggle';
+export chartOptions from './chartOptions';
