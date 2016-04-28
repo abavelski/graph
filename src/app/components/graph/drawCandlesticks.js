@@ -1,7 +1,7 @@
 import d3 from 'd3';
 
-export default function({svg, x, y, h, w, data }) {
-  let width = w/data.length;
+export default function({svg, x, y, h, w, points }) {
+  let width = w/points.length;
 
   let line = d3.svg.line()
     .x( (d) => d.x)
@@ -9,7 +9,7 @@ export default function({svg, x, y, h, w, data }) {
 
   let bars = svg.append('g')
               .selectAll()
-              .data(data)
+              .data(points)
               .enter()
               .append('g')
               .attr('class', (d,i)=>d.close>d.open?'up-day':'down-day');

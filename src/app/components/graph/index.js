@@ -9,29 +9,29 @@ import drawOhlc from './drawOhlc';
 import drawCandlesticks from './drawCandlesticks';
 
 export function buildGraph(options) {
-  if (options.data) {
-    const { width, height, symbol, data, mountPoint, chartType, volumeToggled } = options;
+
+    const { width, height, symbol, points, mountPoint, chartType, volumeToggled } = options;
     //console.log('building graph ', chartType);
     let { svg, w, h } = buildSvg({width, height, mountPoint});
 
-    let { x, y, v } = buildScales({ w , h, data });
+    let { x, y, v } = buildScales({ w , h, points });
 
-    buildAxis({x, y, svg, h, data});
+    buildAxis({x, y, svg, h, points});
     if (chartType==='candlesticks') {
-      drawCandlesticks({svg, x, y, w, h, data});
+      drawCandlesticks({svg, x, y, w, h, points});
     } else if (chartType==='bars') {
-      drawOhlc({svg, x, y, w, h, data});
+      drawOhlc({svg, x, y, w, h, points});
     } else if (chartType==='area') {
-      drawArea({svg, x, y, h, data});
-      drawLine({svg, x, y, data});
+      drawArea({svg, x, y, h, points});
+      drawLine({svg, x, y, points});
     } else if (chartType==='line') {
-      drawLine({svg, x, y, data});
+      drawLine({svg, x, y, points});
     }
 
     if (volumeToggled) {
-        drawVolume({svg, x, v, h, w, data});
+        drawVolume({svg, x, v, h, w, points});
     }
-    buildFocus({ svg, w, h, x, y, data });
+    buildFocus({ svg, w, h, x, y, points });
 
-  }
+
 }

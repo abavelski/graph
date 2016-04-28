@@ -2,7 +2,7 @@ import d3 from 'd3';
 
 let dateFormat = d3.time.format("%Y-%m-%d");
 
-export default function({ svg, w , h, x, y, data}) {
+export default function({ svg, w , h, x, y, points}) {
 
   let focus = svg.append("g").style("display", "none");
 
@@ -101,7 +101,7 @@ export default function({ svg, w , h, x, y, data}) {
     function mousemove() {
       let domain = x.domain();
       let i = domain[d3.bisect(x.range(), d3.mouse(this)[0]) - 1];
-      let d = data[i];
+      let d = points[i];
 
       focus.select("circle.y")
       .attr("transform",

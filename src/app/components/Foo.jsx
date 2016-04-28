@@ -8,6 +8,7 @@ import MenuItem from 'material-ui/MenuItem';
 
 
 import { chartTypeChange, volumeToggle } from '../actions/chartOptions';
+import {fetchData } from '../actions/fetching';
 
 const styles = {
   volume : {
@@ -22,7 +23,7 @@ const styles = {
     textAlign: 'center'
   },
   container : {
-    width : 800,
+    width : 1024,
     margin: 'auto'
   },
   buttons : {
@@ -42,12 +43,15 @@ const styles = {
 
 }
 
+const buttons = ['1d', '1w', '1m', '3m', '6m', 'ytd', '1y', '5y', 'all'];
 const mapStateToProps = (state, ownProps)  => ({
-    symbol : ownProps.params.symbol,
-    chartType : state.chartOptions.chartType,
-    volumeToggled : state.chartOptions.volumeToggled
-});
-const Foo = ({symbol, chartType, volumeToggled, chartTypeChange, volumeToggle}) => (
+        symbol : ownProps.params.symbol,
+        chartType : state.chartOptions.chartType,
+        volumeToggled : state.chartOptions.volumeToggled,
+        period : state.fetching.data.period
+      });
+
+const Foo = ({ symbol, chartType, volumeToggled, period, chartTypeChange, volumeToggle, fetchData }) => (
     <div style={styles.container}>
       <div style={styles.buttons}>
         <Toggle label="Volume" toggled={volumeToggled} onToggle={()=> volumeToggle()} style={styles.volume}/>
@@ -57,20 +61,22 @@ const Foo = ({symbol, chartType, volumeToggled, chartTypeChange, volumeToggle}) 
           <MenuItem value="bars" primaryText="Bars" />
           <MenuItem value="candlesticks" primaryText="Сandlesticks" />
         </DropDownMenu>
-        <FlatButton style={styles.button} labelStyle={styles.btnText} label="1d" />
-        <FlatButton style={styles.button} labelStyle={styles.btnText} label="1w" />
-        <FlatButton style={styles.button} labelStyle={styles.btnText} label="1m" />
-        <FlatButton style={styles.button} labelStyle={styles.btnText} label="3m" />
-        <FlatButton style={styles.button} labelStyle={styles.btnText} label="6m" />
-        <FlatButton style={styles.button} labelStyle={styles.btnText} label="YTD" />
-        <FlatButton style={styles.button} labelStyle={styles.btnText} label="1y" disabled = {true}/>
-        <FlatButton style={styles.button} labelStyle={styles.btnText} label="5y" />
-        <FlatButton style={styles.button} labelStyle={styles.btnText} label="All" />
+
+        { buttons.map((btn)=>
+          <FlatButton
+            key={btn}
+            style={styles.button}
+            labelStyle={styles.btnText}
+            label={btn}
+            onTouchTap={()=>fetchData(symbol, btn)}
+            disabled={btn===period} />
+        )}
+
       </div>
-      <GraphContainer width={800} height={600} symbol={symbol} chartType={chartType} volumeToggled={volumeToggled}/>
+      <GraphContainer width={1024} height={600} symbol={symbol} chartType={chartType} volumeToggled={volumeToggled}/>
 
     </div>
 );
 
 
-export default connect(mapStateToProps, {chartTypeChange, volumeToggle})(Foo);
+export default connect(mapStateToProps, {chartTypeChange, volumeToggle, fetchData})(Foo);

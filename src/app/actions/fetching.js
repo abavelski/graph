@@ -25,15 +25,18 @@ export function fetchOk(res) {
   }
 }
 
-export function fetchData(symbol) {
+export function fetchData(symbol, period) {
   return function (dispatch) {
     dispatch(requestData(symbol));
+    if (!period) {
+      period = '1y';
+    }
     return request
-        .get('/api/history/'+ symbol)
+        .get('/api/history/'+ symbol+'?period='+period)
         .end((err, res) => {
-              let data = [];
-              res.body.forEach(function(d) {
-                data.push({
+              let points = [];
+              res.body.points.forEach(function(d) {
+                points.push({
                   date : new Date(d[0]),
                   open: d[1],
                   high: d[2],
@@ -43,7 +46,10 @@ export function fetchData(symbol) {
                   adjClose: d[6],
                 });
               });
-              dispatch(fetchOk(data)) ;
+              dispatch(fetchOk({
+                period : res.body.period,
+                points : points
+              })) ;
               });
   }
 
