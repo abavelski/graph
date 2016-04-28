@@ -27,7 +27,7 @@ const styles = {
   },
   buttons : {
     float: 'right',
-    width: 550
+    width: 600
   },
   button : {
     fontWeight: 400,
@@ -55,6 +55,7 @@ const Foo = ({symbol, chartType, volumeToggled, chartTypeChange, volumeToggle}) 
           <MenuItem value="area" primaryText="Area" />
           <MenuItem value="line" primaryText="Line" />
           <MenuItem value="bars" primaryText="Bars" />
+          <MenuItem value="candlesticks" primaryText="Сandlesticks" />
         </DropDownMenu>
         <FlatButton style={styles.button} labelStyle={styles.btnText} label="1d" />
         <FlatButton style={styles.button} labelStyle={styles.btnText} label="1w" />

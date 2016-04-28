@@ -6,6 +6,7 @@ import drawArea from './drawArea';
 import drawLine from './drawLine';
 import drawVolume from './drawVolume';
 import drawOhlc from './drawOhlc';
+import drawCandlesticks from './drawCandlesticks';
 
 export function buildGraph(options) {
   if (options.data) {
@@ -16,8 +17,9 @@ export function buildGraph(options) {
     let { x, y, v } = buildScales({ w , h, data });
 
     buildAxis({x, y, svg, h, data});
-
-    if (chartType==='bars') {
+    if (chartType==='candlesticks') {
+      drawCandlesticks({svg, x, y, w, h, data});
+    } else if (chartType==='bars') {
       drawOhlc({svg, x, y, w, h, data});
     } else if (chartType==='area') {
       drawArea({svg, x, y, h, data});

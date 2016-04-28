@@ -44,3 +44,14 @@ body {
     stroke-width: 1px;
     stroke: red;
 }
+.up-day rect {
+    fill: green;
+    stroke-width: 1px;
+    stroke: green;
+}
+
+.down-day rect {
+    fill: red;
+    stroke-width: 1px;
+    stroke: red;
+}
