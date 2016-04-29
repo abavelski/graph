@@ -1,14 +1,15 @@
 import d3 from 'd3';
 
 let yDomain = (points) => {
-  let ext = d3.extent(points, (d) =>d.close),
-    emptySpace = (ext[1]-ext[0])/8,
-    min =ext[0] - emptySpace,
-    max = ext[1] + emptySpace;
+  let maxHigh = d3.max(points, (d)=> d.high),
+      minLow = d3.min(points, (d)=>d.low),
+      emptySpace = (maxHigh-minLow)*0.25,
+      min = minLow - emptySpace,
+      max = maxHigh + emptySpace;
 
-  if (min < 0) {
-    min = 0
-  };
+      if (min < 0) {
+        min = 0
+      };
   return [min, max];
 }
 

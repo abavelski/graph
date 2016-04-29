@@ -73,7 +73,7 @@ const Foo = ({ symbol, chartType, volumeToggled, period, chartTypeChange, volume
         )}
 
       </div>
-      <GraphContainer width={1024} height={600} symbol={symbol} chartType={chartType} volumeToggled={volumeToggled}/>
+      <GraphContainer width={1024} height={600} symbol={symbol}/>
 
     </div>
 );

@@ -1,4 +1,4 @@
-import buildFocus from './buildFocus';
+import focus from './focus';
 import buildSvg from './buildSvg';
 import buildScales from './buildScales';
 import buildAxis from './buildAxis';
@@ -8,10 +8,10 @@ import drawVolume from './drawVolume';
 import drawOhlc from './drawOhlc';
 import drawCandlesticks from './drawCandlesticks';
 
-export function buildGraph(options) {
+export function buildGraph(options, mountPoint) {
 
-    const { width, height, symbol, points, mountPoint, chartType, volumeToggled } = options;
-    //console.log('building graph ', chartType);
+    const { width, height, symbol, points, chartType, volumeToggled } = options;
+
     let { svg, w, h } = buildSvg({width, height, mountPoint});
 
     let { x, y, v } = buildScales({ w , h, points });
@@ -31,7 +31,5 @@ export function buildGraph(options) {
     if (volumeToggled) {
         drawVolume({svg, x, v, h, w, points});
     }
-    buildFocus({ svg, w, h, x, y, points });
-
-
+    focus({ svg, w, h, x, y, points });
 }

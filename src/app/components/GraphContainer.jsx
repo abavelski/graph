@@ -13,17 +13,8 @@
 
     componentWillReceiveProps(props) {
       console.log('componentWillReceiveProps', props);
-      const { width, height, symbol, points, chartType, volumeToggled } = props;
-      if (points) {
-          buildGraph({
-            chartType,
-            volumeToggled,
-            width,
-            height,
-            symbol,
-            points,
-            mountPoint: this.refs.mountPoint
-          });
+      if (props.points) {
+          buildGraph(props, this.refs.mountPoint);
       }
     }
 
@@ -50,7 +41,10 @@
   export default connect(
     state => ({
       isFetching: state.fetching.isFetching,
-      points: state.fetching.data.points
+      points: state.fetching.data.points,
+      chartType : state.chartOptions.chartType,
+      volumeToggled : state.chartOptions.volumeToggled,
+      period : state.fetching.data.period
     }),
     { fetchData }
   )(GraphContainer);
