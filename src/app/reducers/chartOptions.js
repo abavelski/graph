@@ -1,8 +1,9 @@
-import { CHART_TYPE_CHANGE, VOLUME_TOGGLE } from '../constants'
+import { CHART_TYPE_CHANGE, VOLUME_TOGGLE, EDIT_MODE_TOGGLE } from '../constants'
 
 const initialState = {
   chartType: 'area',
-  volumeToggled: true
+  volumeToggled: true,
+  editMode: false
 }
 
 export default function (state = initialState, action) {
@@ -15,6 +16,11 @@ export default function (state = initialState, action) {
     return {
       ...state,
       volumeToggled: !state.volumeToggled
+     }
+  } else if (action.type === EDIT_MODE_TOGGLE) {
+    return {
+      ...state,
+      editMode: !state.editMode
      }
   }
   return state

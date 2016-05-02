@@ -1,11 +1,11 @@
 import d3 from 'd3';
+import {formatVolume, dateTickFormater} from '../formatters';
 
-let dateFormat = d3.time.format("%Y-%m-%d");
-let dateFormatPointer = d3.time.format("%d.%m");
+export default function({ focus, w , h, x, y, points, period}) {
 
-export default function({ focus, w , h, x, y, points}) {
+  let dateFormatPointer = dateTickFormater(period);
 
-  return   function() {
+  return function() {
       let domain = x.domain();
       let i = domain[d3.bisect(x.range(), d3.mouse(this)[0]) - 1];
       let d = points[i];
@@ -20,13 +20,13 @@ export default function({ focus, w , h, x, y, points}) {
         .attr("transform", "translate(0,"+ y(d.close) + ")");
 
       focus.select("text.date-pointer")
-        .attr("transform", "translate(" + (x(i)-15) + ","+(h+10)+")");
+        .attr("transform", "translate(" + (x(i)-22) + ","+(h+10)+")");
 
       focus.select("text.date-pointer")
         .text(dateFormatPointer(d.date));
 
       focus.select("rect.date-pointer-background")
-        .attr("transform", "translate(" + (x(i)-17) + ","+(h+1)+")");
+        .attr("transform", "translate(" + (x(i)-24) + ","+(h+1)+")");
 
       focus.select("text.open")
         .text(d.open);
@@ -41,7 +41,7 @@ export default function({ focus, w , h, x, y, points}) {
         .text(d.low);
 
       focus.select("text.volume")
-        .text(d.volume);
+        .text(formatVolume(d.volume));
 
       }
 

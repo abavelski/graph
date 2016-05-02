@@ -30,7 +30,7 @@ export default function({focus, w, h}) {
       .attr("class", "date-pointer-background")
       .attr("x", 0)
       .attr("y", 0)
-      .attr("width", 31)
+      .attr("width", 51)
       .attr("height", 11)
       .style("fill", "black");
 

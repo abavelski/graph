@@ -1,4 +1,4 @@
-import { CHART_TYPE_CHANGE, VOLUME_TOGGLE } from '../constants'
+import { CHART_TYPE_CHANGE, EDIT_MODE_TOGGLE, VOLUME_TOGGLE } from '../constants'
 
 export function chartTypeChange(chartType) {
   return {
@@ -10,5 +10,11 @@ export function chartTypeChange(chartType) {
 export function volumeToggle() {
   return {
     type: VOLUME_TOGGLE
+  }
+}
+
+export function editModeToggle() {
+  return {
+    type: EDIT_MODE_TOGGLE
   }
 }

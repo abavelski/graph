@@ -3,7 +3,7 @@ import d3 from 'd3';
 let yDomain = (points) => {
   let maxHigh = d3.max(points, (d)=> d.high),
       minLow = d3.min(points, (d)=>d.low),
-      emptySpace = (maxHigh-minLow)*0.25,
+      emptySpace = (maxHigh-minLow)*0.20,
       min = minLow - emptySpace,
       max = maxHigh + emptySpace;
 

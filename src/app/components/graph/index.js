@@ -10,13 +10,13 @@ import drawCandlesticks from './drawCandlesticks';
 
 export function buildGraph(options, mountPoint) {
 
-    const { width, height, symbol, points, chartType, volumeToggled } = options;
+    const { width, height, symbol, points, chartType, volumeToggled, period } = options;
 
     let { svg, w, h } = buildSvg({width, height, mountPoint});
 
     let { x, y, v } = buildScales({ w , h, points });
 
-    buildAxis({x, y, svg, h, points});
+    buildAxis({x, y, svg, h, w, points, period});
     if (chartType==='candlesticks') {
       drawCandlesticks({svg, x, y, w, h, points});
     } else if (chartType==='bars') {
@@ -31,5 +31,5 @@ export function buildGraph(options, mountPoint) {
     if (volumeToggled) {
         drawVolume({svg, x, v, h, w, points});
     }
-    focus({ svg, w, h, x, y, points });
+    focus({ svg, w, h, x, y, points, period });
 }

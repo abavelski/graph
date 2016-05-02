@@ -5,9 +5,12 @@ import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton';
+import EditBtn from 'material-ui/svg-icons/content/create';
+import Mail from 'material-ui/svg-icons/content/mail';
 
 
-import { chartTypeChange, volumeToggle } from '../actions/chartOptions';
+import { chartTypeChange, volumeToggle, editModeToggle } from '../actions/chartOptions';
 import {fetchData } from '../actions/fetching';
 
 const styles = {
@@ -28,7 +31,12 @@ const styles = {
   },
   buttons : {
     float: 'right',
-    width: 600
+    width: 500
+  },
+  ticker : {
+    float: 'left',
+    width: 100,
+    marginLeft: '15px'
   },
   button : {
     fontWeight: 400,
@@ -43,16 +51,39 @@ const styles = {
 
 }
 
-const buttons = ['1d', '1w', '1m', '3m', '6m', 'ytd', '1y', '5y', 'all'];
+const buttons = ['1m', '3m', '6m', 'ytd', '1y', '5y', 'all'];
 const mapStateToProps = (state, ownProps)  => ({
         symbol : ownProps.params.symbol,
         chartType : state.chartOptions.chartType,
         volumeToggled : state.chartOptions.volumeToggled,
+        editMode : state.chartOptions.editMode,
         period : state.fetching.data.period
       });
 
-const Foo = ({ symbol, chartType, volumeToggled, period, chartTypeChange, volumeToggle, fetchData }) => (
+const edit = (editMode, editModeToggle) => {
+  if (editMode) {
+    return <IconButton tooltip="Mail" ><Mail /></IconButton>
+  } else {
+    return <IconButton tooltip="Edit annotations" onTouchTap={()=>editModeToggle()} ><EditBtn /></IconButton>
+  }
+
+};
+
+const Foo = ({
+    symbol,
+    period,
+    chartType,
+    volumeToggled,
+    editMode,
+    chartTypeChange,
+    volumeToggle,
+    editModeToggle,
+    fetchData
+  }) => (
     <div style={styles.container}>
+      <div style={styles.ticker}>
+        {edit(editMode, editModeToggle)}
+      </div>
       <div style={styles.buttons}>
         <Toggle label="Volume" toggled={volumeToggled} onToggle={()=> volumeToggle()} style={styles.volume}/>
         <DropDownMenu value={chartType} onChange={(e, i, v)=>chartTypeChange(v)}  >
@@ -65,13 +96,13 @@ const Foo = ({ symbol, chartType, volumeToggled, period, chartTypeChange, volume
         { buttons.map((btn)=>
           <FlatButton
             key={btn}
+            hoverColor="rgba(0, 0, 0, 0)"
             style={styles.button}
             labelStyle={styles.btnText}
             label={btn}
             onTouchTap={()=>fetchData(symbol, btn)}
             disabled={btn===period} />
         )}
-
       </div>
       <GraphContainer width={1024} height={600} symbol={symbol}/>
 
@@ -79,4 +110,4 @@ const Foo = ({ symbol, chartType, volumeToggled, period, chartTypeChange, volume
 );
 
 
-export default connect(mapStateToProps, {chartTypeChange, volumeToggle, fetchData})(Foo);
+export default connect(mapStateToProps, { chartTypeChange, volumeToggle, editModeToggle, fetchData })(Foo);
