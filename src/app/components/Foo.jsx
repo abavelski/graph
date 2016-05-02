@@ -7,7 +7,13 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import EditBtn from 'material-ui/svg-icons/content/create';
-import Mail from 'material-ui/svg-icons/content/mail';
+import HorizontalLine from 'material-ui/svg-icons/editor/border-horizontal';
+import VerticalLine from 'material-ui/svg-icons/editor/border-vertical';
+import TrendLine from 'material-ui/svg-icons/action/trending-up';
+import Comment from 'material-ui/svg-icons/communication/comment';
+import Done from 'material-ui/svg-icons/action/Done';
+import Undo from 'material-ui/svg-icons/content/Undo';
+import Cancel from 'material-ui/svg-icons/navigation/cancel';
 
 
 import { chartTypeChange, volumeToggle, editModeToggle } from '../actions/chartOptions';
@@ -35,7 +41,7 @@ const styles = {
   },
   ticker : {
     float: 'left',
-    width: 100,
+    width: 300,
     marginLeft: '15px'
   },
   button : {
@@ -51,6 +57,7 @@ const styles = {
 
 }
 
+const chartTypes = ['area', 'line', 'bars', 'candlesticks'];
 const buttons = ['1m', '3m', '6m', 'ytd', '1y', '5y', 'all'];
 const mapStateToProps = (state, ownProps)  => ({
         symbol : ownProps.params.symbol,
@@ -62,9 +69,18 @@ const mapStateToProps = (state, ownProps)  => ({
 
 const edit = (editMode, editModeToggle) => {
   if (editMode) {
-    return <IconButton tooltip="Mail" ><Mail /></IconButton>
+    return (<div style={styles.ticker}>
+      <IconButton tooltip="Horizontal line" ><HorizontalLine /></IconButton>
+      <IconButton tooltip="Vertical line" ><VerticalLine /></IconButton>
+      <IconButton tooltip="Trend line" ><TrendLine /></IconButton>
+      <IconButton tooltip="Comment" ><Comment /></IconButton>
+      <IconButton tooltip="Undo"><Undo /></IconButton>
+      <IconButton tooltip="Done" onTouchTap={()=>editModeToggle()}><Done /></IconButton>
+      </div>)
   } else {
-    return <IconButton tooltip="Edit annotations" onTouchTap={()=>editModeToggle()} ><EditBtn /></IconButton>
+    return (<div style={styles.ticker}>
+          <IconButton tooltip="Add annotations" onTouchTap={()=>editModeToggle()} ><EditBtn /></IconButton>
+          </div>)
   }
 
 };
@@ -81,22 +97,17 @@ const Foo = ({
     fetchData
   }) => (
     <div style={styles.container}>
-      <div style={styles.ticker}>
         {edit(editMode, editModeToggle)}
-      </div>
       <div style={styles.buttons}>
         <Toggle label="Volume" toggled={volumeToggled} onToggle={()=> volumeToggle()} style={styles.volume}/>
-        <DropDownMenu value={chartType} onChange={(e, i, v)=>chartTypeChange(v)}  >
-          <MenuItem value="area" primaryText="Area" />
-          <MenuItem value="line" primaryText="Line" />
-          <MenuItem value="bars" primaryText="Bars" />
-          <MenuItem value="candlesticks" primaryText="Сandlesticks" />
+        <DropDownMenu value={chartType} onChange={(e, i, v)=>chartTypeChange(v)} >
+          { chartTypes.map( type => <MenuItem key={type} value={type} primaryText={type} /> )}
         </DropDownMenu>
 
-        { buttons.map((btn)=>
+        { buttons.map( btn =>
           <FlatButton
             key={btn}
-            hoverColor="rgba(0, 0, 0, 0)"
+            hoverColor="white"
             style={styles.button}
             labelStyle={styles.btnText}
             label={btn}

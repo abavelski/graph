@@ -12,14 +12,12 @@
     }
 
     componentWillReceiveProps(props) {
-      console.log('componentWillReceiveProps', props);
       if (props.points) {
           buildGraph(props, this.refs.mountPoint);
       }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-      console.log('shouldComponentUpdate', nextProps, nextState);
       return false;
     }
 
