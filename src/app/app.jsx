@@ -11,7 +11,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
 import * as reducers from './reducers'
-import { Main, Foo } from './components'
+import { Main, GraphPage } from './components'
 
 const reducer = combineReducers({
   ...reducers,
@@ -30,8 +30,8 @@ ReactDOM.render(
     <Provider store={store}>
       <Router history={history}>
         <Route path="" component={Main}>
-          <Redirect from="/" to="foo/msft" />
-          <Route path="foo/:symbol" component={Foo}/>
+          <Redirect from="/" to="graph/msft" />
+          <Route path="graph/:symbol" component={GraphPage}/>
         </Route>
       </Router>
     </Provider>

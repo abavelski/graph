@@ -1,2 +1,2 @@
-export Foo from './Foo'
+export GraphPage from './GraphPage'
 export Main from './Main'

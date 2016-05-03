@@ -30,10 +30,8 @@
         font: '10px sans-serif',
         margin : 'auto'
       };
-
       return <div style={style} ref="mountPoint" />;
     }
-
   }
 
   export default connect(
