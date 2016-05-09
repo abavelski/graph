@@ -1,11 +1,11 @@
 import React from 'react'
-import GraphContainer from './GraphContainer';
+import GraphContainer from '../components/GraphContainer';
 import { connect } from 'react-redux';
 
-import AnnotationEditToolbar from './AnnotationEditToolbar';
-import ButtonsToolbar from './ButtonsToolbar';
-import GraphToolbar from './GraphToolbar';
-import styles from './styles';
+import AnnotationEditToolbar from '../components/AnnotationEditToolbar';
+import ButtonsToolbar from '../components/ButtonsToolbar';
+import GraphToolbar from '../components/GraphToolbar';
+import styles from '../components/styles';
 
 const mapStateToProps = (state, ownProps)  => ({
         symbol : ownProps.params.symbol,

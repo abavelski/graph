@@ -10,8 +10,9 @@ import {getMuiTheme, lightBaseTheme} from 'material-ui/styles';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
-import * as reducers from './reducers'
-import { Main, GraphPage } from './components'
+import * as reducers from './reducers';
+import { Main } from './components';
+import  GraphPage  from './pages/GraphPage';
 
 const reducer = combineReducers({
   ...reducers,
