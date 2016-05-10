@@ -7,20 +7,11 @@ import MenuItem from 'material-ui/MenuItem';
 
 const styles = {
   root: {
+    left:200,
     display: 'inline-block',
     position: 'relative',
     width: 256,
-  },
-  menu: {
-    width: '100%',
-  },
-  list: {
-    display: 'block',
-    width: 256,
-  },
-  innerDiv: {
-    overflow: 'hidden',
-  },
+  }
 }
 
 const txtField = <TextField autoComplete="off" hintText="Search" multiLine={false}/>;
@@ -29,15 +20,11 @@ const AutoComplete = () => (
   <div style={styles.root} >
     {txtField}
       <Paper>
-      <Menu
-        autoWidth={false}
-        disableAutoFocus={true}
-        style={styles}
-        listStyle={styles.list}>
-        <MenuItem innerDivStyle={styles.innerDiv} value="bla" primaryText="Bla"/>
-        <MenuItem innerDivStyle={styles.innerDiv} value="bla1" primaryText="Bla1"/>
-        <MenuItem innerDivStyle={styles.innerDiv} value="bla2" primaryText="Bl2"/>
-        <MenuItem innerDivStyle={styles.innerDiv} value="bla3" primaryText="Bla3"/>
+      <Menu desktop={true} width={256}>
+        <MenuItem value="bla" primaryText="Bla"/>
+        <MenuItem value="bla1" primaryText="Bla1"/>
+        <MenuItem value="bla2" primaryText="Bl2"/>
+        <MenuItem value="bla3" primaryText="Bla3"/>
       </Menu>
     </Paper>
   </div>);
