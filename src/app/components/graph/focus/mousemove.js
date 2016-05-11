@@ -7,7 +7,7 @@ export default function({ focus, w , h, x, y, points, period}) {
 
   return function() {
       let domain = x.domain();
-      let i = domain[d3.bisect(x.range(), d3.mouse(this)[0]) - 1];
+      let i = domain[d3.bisect(x.range(), d3.mouse(this)[0])];
       let d = points[i];
 
       focus.select("circle.y")

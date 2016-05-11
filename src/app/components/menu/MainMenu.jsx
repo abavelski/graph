@@ -10,7 +10,7 @@ import styles from './styles';
 const MainMenu = () => (
     <header>
         <div style={styles.div}>
-            <AutoComplete/>
+            
 
           </div>
     </header>);

@@ -1,10 +1,10 @@
 import d3 from 'd3';
 import {dateTickFormater} from './formatters';
 
-const integerDivision = (x, y) => (x-x%y)/y
-
 export default function({ x, y, svg, h, w, points, period }) {
-    const tickFilter = (d, i) => i>0 && !(i % integerDivision(points.length, 5));
+
+    const devider = (points.length-points.length%4)/4;
+    const tickFilter = (d, i) => i % devider===0 && points.length-i>devider;
     const dateFormat = dateTickFormater(period);
 
     let xAxis = d3.svg.axis()
@@ -12,9 +12,9 @@ export default function({ x, y, svg, h, w, points, period }) {
             .orient("bottom")
             .tickSize(-h,0)
             .tickValues(x.domain().filter(tickFilter ))
-            .tickFormat((i)  => dateFormat(points[i].date)),
+            .tickFormat((i)  =>i>0?dateFormat(points[i].date):''),
 
-        yAxis = d3.svg.axis().scale(y).ticks(5).tickSize(-w, 0).orient("left");
+        yAxis = d3.svg.axis().scale(y).ticks(5).tickSize(-w, 0).orient("right");
 
     svg.append("g")
         .attr("class", "x axis")
@@ -24,5 +24,6 @@ export default function({ x, y, svg, h, w, points, period }) {
 
     svg.append("g")
         .attr("class", "y axis")
+        .attr("transform", "translate("+w+", 0)")
         .call(yAxis);
 }
