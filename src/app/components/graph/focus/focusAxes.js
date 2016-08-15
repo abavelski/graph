@@ -34,9 +34,43 @@ export default function({focus, w, h}) {
       .attr("height", 11)
       .style("fill", "black");
 
+  focus.append("rect")
+       .attr("class", "close-pointer-background")
+       .attr("x", w+5)
+       .attr("y", 0)
+       .attr("width", 30)
+       .attr("height", 12)
+       .style("fill", "black");
+
+  focus.append("rect")
+       .attr("class", "change-pointer-background")
+       .attr("x", -38)
+       .attr("y", 0)
+       .attr("width", 33)
+       .attr("height", 12)
+       .style("fill", "black");
+
+  focus.append("polygon")
+        .attr("class", "close-pointer-background")
+        .attr("points", w+",6 "+(w+6)+",12 "+(w+6)+",0")
+        .style("fill", "black");
+
+  focus.append("polygon")
+        .attr("class", "change-pointer-background")
+        .attr("points", "-1,6 -6,12 -6,0")
+        .style("fill", "black");
+
 
   focus.append("text")
       .attr("class", "date-pointer")
+      .attr("fill", "white")
+
+  focus.append("text")
+      .attr("class", "close-pointer")
+      .attr("fill", "white")
+
+  focus.append("text")
+      .attr("class", "change-pointer")
       .attr("fill", "white")
 
 

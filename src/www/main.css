@@ -3,8 +3,6 @@ html {
   font-family: 'Roboto', sans-serif;
 }
 
-
-
 body {
   font-size: 13px;
   line-height: 20px;
@@ -30,7 +28,7 @@ body {
 .line {
   fill: none;
   stroke: steelblue;
-  stroke-width: 1px;
+  stroke-width: 2px;
 }
 
 .up-day path {

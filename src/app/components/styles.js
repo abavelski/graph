@@ -11,8 +11,8 @@ export default {
     textAlign: 'center'
   },
   container : {
-    width : 1024,
-    margin: 'auto'
+    //width : 'auto',
+    //margin: 'auto'
   },
   buttons : {
     float: 'right',

@@ -13,3 +13,8 @@ export function formatVolume(v) {
 export function dateTickFormater(period) {
   return d3.time.format("%d-%b-%y");
 }
+
+export function formatChange(start, current) {
+
+  return ((current-start)/start*100).toFixed(2) + '%';
+}

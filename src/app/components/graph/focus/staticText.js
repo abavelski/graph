@@ -4,8 +4,10 @@ export default function(focus) {
     .attr("x", 15)
     .attr("y", -20)
     .attr("width", 80)
-    .attr("height", 50)
-    .style("fill", "white");
+    .attr("height", 55)
+    .style("fill", "white")
+    .style("stroke", "black")
+    .style("strike-width", "1");
 
     focus.append("text")
       .attr("x", 20)

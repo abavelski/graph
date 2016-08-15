@@ -24,7 +24,7 @@
     render() {
       const { width, height } = this.props;
       const style = {
-        width,
+        //width,
         height,
         border: 'none',
         font: '10px sans-serif',
