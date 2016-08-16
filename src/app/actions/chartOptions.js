@@ -1,20 +1,25 @@
-import { CHART_TYPE_CHANGE, EDIT_MODE_TOGGLE, VOLUME_TOGGLE } from '../constants'
+import {
+  CHART_TYPE_CHANGE,
+  EDIT_MODE_TOGGLE,
+  VOLUME_TOGGLE,
+  CHART_RESIZE,
+  SETTINGS_TOGGLE
+} from '../constants'
 
-export function chartTypeChange(chartType) {
-  return {
+export const chartTypeChange = (chartType) => ({
     type: CHART_TYPE_CHANGE,
     chartType
-  }
-}
+  });
 
-export function volumeToggle() {
-  return {
+export const chartResize = (width) => ({
+    type: CHART_RESIZE,
+    width
+  });
+
+export const volumeToggle = () => ({
     type: VOLUME_TOGGLE
-  }
-}
+  });
 
-export function editModeToggle() {
-  return {
+export const editModeToggle = () => ({
     type: EDIT_MODE_TOGGLE
-  }
-}
+});

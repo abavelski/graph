@@ -7,9 +7,10 @@ const removeOldSvg = (mount) => {
 }
 
 export default function({width, height, mountPoint}) {
+  if (!width) {
+    width = mountPoint.offsetWidth;
+  }
 
-  width = mountPoint.offsetWidth;
-  
   let margin = {top: 20, right: 40, bottom: 30, left: 40},
       w = width - margin.left - margin.right,
       h = height - margin.top - margin.bottom;

@@ -4,7 +4,7 @@ import {dateTickFormater} from './formatters';
 export default function({ x, y, svg, h, w, points, period }) {
 
     const devider = (points.length-points.length%4)/4;
-    const tickFilter = (d, i) => i % devider===0 && points.length-i>devider;
+    const tickFilter = (d, i) => i % devider===0 && points.length-i>(devider/2);
     const dateFormat = dateTickFormater(period);
 
     let xAxis = d3.svg.axis()

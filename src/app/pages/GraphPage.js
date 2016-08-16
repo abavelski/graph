@@ -18,7 +18,7 @@ const GraphPage = ({symbol, editMode}) => (
     <div style={styles.container}>
       {leftToolbar(editMode)}
       <ButtonsToolbar symbol={ symbol} />
-      <GraphContainer width={1024} height={600} symbol={symbol}/>
+      <GraphContainer height={600} symbol={symbol}/>
     </div>
 );
 

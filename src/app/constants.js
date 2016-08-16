@@ -3,3 +3,7 @@ export const FETCH_DATA = 'FETCH_DATA';
 export const CHART_TYPE_CHANGE = 'CHART_TYPE_CHANGE';
 export const VOLUME_TOGGLE = 'VOLUME_TOGGLE';
 export const EDIT_MODE_TOGGLE = 'EDIT_MODE_TOGGLE';
+export const CHART_RESIZE = 'CHART_RESIZE';
+export const UPDATE_SETTINGS = 'UPDATE_SETTINGS';
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
